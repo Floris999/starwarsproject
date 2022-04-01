@@ -6,8 +6,8 @@
         <div class="cards">
         <div class="card-item"><!--Start-->
             <ul>
-                <li>Name</li>
-                <li>Type</li>
+                <li>Name: Luke</li>
+                <li>Type: Star Wars</li>
                 <li><button>View Movies</button></li>
             </ul>
         </div><!--End-->
@@ -71,6 +71,7 @@
 
 ul {
     list-style: none;
+    margin: 0px;
 }
 
 li {
@@ -111,6 +112,10 @@ main > * {
     background-position: top center;
 }
 
+.right-side:hover {
+    box-shadow: inset 0 0 10px #FFFFFF;
+}
+
 .banner {
   min-width: 100%;
   min-height: 100%;
@@ -119,7 +124,9 @@ main > * {
 .cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 40px;
+  margin: 50px 0px;
+  
 }
 
 .cards > * {
@@ -127,10 +134,15 @@ main > * {
 }
 
 .card-item {
-  border: 2px solid #FFE81F;
   border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.199);
   padding: 5px 20px;
 }
+
+.card-item:hover {
+    box-shadow: 0 4px 8px 0 #FFE81F;
+}
+
 
 button {
   background-color: white;
