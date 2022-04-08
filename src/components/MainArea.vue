@@ -43,7 +43,7 @@
             }
         },
         created() {
-            for(let id = 1; id < 4; id++)
+            for(let id = 1; id < 3; id++)
             fetch(`https://swapi.dev/api/people/${id}/`)
             .then(response => response.json())
             .then(function (response) {
