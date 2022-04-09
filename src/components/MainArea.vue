@@ -5,11 +5,7 @@
             <p>This project is about the Star Wars API. The project is based on API practice and Front-End work in Vue.js.</p>
         <div class="cards">
         <div class="card-item"><!--Start-->
-            <ul>
-                <li>Name: Luke</li>
-                <li>Type: Star Wars</li>
-                <li><button>View Movies</button></li>
-            </ul>
+            {{ list }}
         </div><!--End-->
         <div class="card-item"><!--Start-->
             <ul>
@@ -39,25 +35,36 @@
         name: "MainArea",
         data() {
             return {
-                   
+              list: this.getStarWarsApi
             }
         },
         created() {
-            for(let id = 1; id < 3; id++)
-            fetch(`https://swapi.dev/api/people/${id}/`)
-            .then(response => response.json())
-            .then(function (response) {
+          let starWarsActors = [];
+          let getStarWarsApi = () => {
+            for(let id = 1; id < 3; id++) {
+              fetch(`https://swapi.dev/api/people/${id}/`)
+              .then(response => response.json())
+              .then(function (response) {
                 //console.log(response)
-                let starWarsActorData = [
-                {   name: response.name,
+                let starWarsActorData = 
+                  { name: response.name,
                     height: response.height,
                     birthday: response.birth_year
+                  };
+                starWarsActors.push(starWarsActorData);
+              })
+              .finally( () => {
+                starWarsActors.map(split => {
+                  let finalStarWarsList = `
+                  <ul><li>${split.name}</li></ul>
+                  `;
+                  console.log(finalStarWarsList)
+                })
                 }
-                ];
-                return starWarsActorData;
-            });
+              )
+            } //end of loop
+          } //end of function  
         }
-
 
     }
 
@@ -85,7 +92,7 @@ main {
   flex-direction: row;
   margin: 0px;
   padding: 0px;
-  height:100vh;
+  height: 100vh;
 }
 
 main > * {
