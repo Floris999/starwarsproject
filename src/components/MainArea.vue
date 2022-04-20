@@ -5,12 +5,14 @@
             <p>This project is about the Star Wars API. The project is based on API practice and Front-End work in Vue.js.</p>
         <div class="cards">
         <div class="card-item"><!--Start-->
-          <h3>Name: {{ actor }}</h3>
+          <h3>Name: {{actor}}</h3>
+          <h3>Gender: {{gender}}</h3>
+          <h3>Hair Color: {{haircolor}}</h3>
           <button>View Movies</button>
         </div><!--End-->
         <div class="card-item"><!--Start-->
             <ul>
-                <li>Name</li>
+                <li></li>
                 <li>Type</li>
                 <li><button>View Movies</button></li>
             </ul>
@@ -36,20 +38,40 @@
         name: "MainArea",
         data() {
             return {
-              actor: this.actor
+              actor: this.actor,
+              gender: this.gender,
+              haircolor: this.hair_color,
+              datalist: [
+                {actor: this.actor},
+                {gender: this.gender},
+                {haircolor: this.hair_color}
+              ]
             }
         },
         methods: {
           async  getStarWarsActors(id) {
             let response = await fetch(`https://swapi.dev/api/people/${id}/`);
             let data = await response.json();
-            console.log(data);
+            console.log(data.name);
             return data.name;
-          } 
+          },
+          async  getStarWarsGender(id) {
+            let response = await fetch(`https://swapi.dev/api/people/${id}/`);
+            let data = await response.json();
+            console.log(data.gender);
+            return data.gender;
+          },
+          async  getStarWarsHairColor(id) {
+            let response = await fetch(`https://swapi.dev/api/people/${id}/`);
+            let data = await response.json();
+            console.log(data.hair_color);
+            return data.hair_color;
+          }  
         },
         async created() {
-          this.actor = await this.getStarWarsActors(1);
-          console.log(this.actor);
+          this.actor = await this.getStarWarsActors(1); //call get actors function
+          this.gender = await this.getStarWarsGender(1); //call get gender function
+          this.hair_color = await this.getStarWarsHairColor(1); //call get hair color function
         }
     }
 
@@ -62,7 +84,7 @@
 }
 
 h3 {
-  color: white;
+  color: #FFE81F;
   font-size: 14px;
 }
 
