@@ -5,7 +5,8 @@
             <p>This project is about the Star Wars API. The project is based on API practice and Front-End work in Vue.js.</p>
         <div class="cards">
         <div class="card-item"><!--Start-->
-            {{ list }}
+          <h3>Name: {{ actor }}</h3>
+          <button>View Movies</button>
         </div><!--End-->
         <div class="card-item"><!--Start-->
             <ul>
@@ -35,37 +36,21 @@
         name: "MainArea",
         data() {
             return {
-              list: this.getStarWarsApi
+              actor: this.actor
             }
         },
-        created() {
-          let starWarsActors = [];
-          let getStarWarsApi = () => {
-            for(let id = 1; id < 3; id++) {
-              fetch(`https://swapi.dev/api/people/${id}/`)
-              .then(response => response.json())
-              .then(function (response) {
-                //console.log(response)
-                let starWarsActorData = 
-                  { name: response.name,
-                    height: response.height,
-                    birthday: response.birth_year
-                  };
-                starWarsActors.push(starWarsActorData);
-              })
-              .finally( () => {
-                starWarsActors.map(split => {
-                  let finalStarWarsList = `
-                  <ul><li>${split.name}</li></ul>
-                  `;
-                  console.log(finalStarWarsList)
-                })
-                }
-              )
-            } //end of loop
-          } //end of function  
+        methods: {
+          async  getStarWarsActors(id) {
+            let response = await fetch(`https://swapi.dev/api/people/${id}/`);
+            let data = await response.json();
+            console.log(data);
+            return data.name;
+          } 
+        },
+        async created() {
+          this.actor = await this.getStarWarsActors(1);
+          console.log(this.actor);
         }
-
     }
 
 </script>
@@ -74,6 +59,11 @@
 
 .dark-side h1 {
   -webkit-text-stroke: 1px #FFE81F;
+}
+
+h3 {
+  color: white;
+  font-size: 14px;
 }
 
 ul {
