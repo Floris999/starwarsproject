@@ -30,7 +30,7 @@
   box-shadow: inset 0 0 10px #000000;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1200px) {
   .menu-list {
       justify-content: center;
       width: 100%;

@@ -3,24 +3,13 @@
         <div class="dark-side">
             <h1>Welcome To The Star Wars DataBase</h1>
             <p>This project is about the Star Wars API. The project is based on API practice and Front-End work in Vue.js.</p>
+            <h2>See here all the Star Wars actors</h2>
         <div class="cards">
-        <div class="card-item"><!--Start-->
-          <h3>Name: {{actor}}</h3>
-          <h3>Gender: {{gender}}</h3>
-          <h3>Hair Color: {{haircolor}}</h3>
+        <div class="card-item" v-for="actor in actordetails" :key="actor"><!--Start-->
+          <h3>Name: {{actor.name}}</h3>
+          <h3>Gender: {{actor.gender}}</h3>
+          <h3>Hair Color: {{actor.haircolor}}</h3>
           <button>View Movies</button>
-        </div><!--End-->
-        <div class="card-item"><!--Start-->
-            <ul>
-                <li v-for="info in starwarsinfolist" :key="info">{{info}}</li>
-            </ul>
-        </div><!--End-->
-        <div class="card-item"><!--Start-->
-            <ul>
-                <li>Name</li>
-                <li>Type</li>
-                <li><button>View Movies</button></li>
-            </ul>
         </div><!--End-->
         </div>
         </div>
@@ -36,36 +25,25 @@
         name: "MainArea",
         data() {
             return {
-              actor: this.actor,
-              gender: this.gender,
-              haircolor: this.hair_color,
-              starwarsinfolist: [this.actor, this.gender, this.hair_color]
+            actordetails: [],
+            id: [1, 2, 3, 4, 5]
             }
         },
         methods: {
-          async  getStarWarsActors(id) {
-            let response = await fetch(`https://swapi.dev/api/people/${id}/`);
+          async  getStarWarsActorDetails(id) {
+            let response = await fetch(`https://swapi.dev/api/people/${id}`);
             let data = await response.json();
-            //console.log(data.name);
-            return data.name;
-          },
-          async  getStarWarsGender(id) {
-            let response = await fetch(`https://swapi.dev/api/people/${id}/`);
-            let data = await response.json();
-            //console.log(data.gender);
-            return data.gender;
-          },
-          async  getStarWarsHairColor(id) {
-            let response = await fetch(`https://swapi.dev/api/people/${id}/`);
-            let data = await response.json();
-            //console.log(data.hair_color);
-            return data.hair_color;
-          }  
+            //console.log(data);
+            let listDetails = {
+              name: data.name,
+              gender: data.gender,
+              haircolor: data.hair_color
+            }
+            this.actordetails.push(listDetails);
+          }, 
         },
         async created() {
-          await this.getStarWarsActor(1); //call get actors function
-          await this.getStarWarsGender(1); //call get gender function
-          await this.getStarWarsHairColor(1); //call get hair color function
+          await this.getStarWarsActorDetails(1); //call get actors details function
         }
     }
 
@@ -75,6 +53,11 @@
 
 .dark-side h1 {
   -webkit-text-stroke: 1px #FFE81F;
+}
+
+h2 {
+  color: white;
+  font-size: 24px;
 }
 
 h3 {
@@ -137,6 +120,7 @@ main > * {
 .cards {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   gap: 40px;
   margin: 50px 0px;
   
@@ -149,7 +133,7 @@ main > * {
 .card-item {
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.199);
-  padding: 5px 20px;
+  padding: 40px 20px;
 }
 
 .card-item:hover {
@@ -177,6 +161,15 @@ button {
   .right-side {
       background-position: center;
       background-size: cover;
+  }
+
+  .dark-side {
+    padding: 60px;
+  }
+
+  .cards {
+    flex-direction: column;
+    width: auto;
   }
 }
 
