@@ -12,9 +12,7 @@
         </div><!--End-->
         <div class="card-item"><!--Start-->
             <ul>
-                <li></li>
-                <li>Type</li>
-                <li><button>View Movies</button></li>
+                <li v-for="info in starwarsinfolist" :key="info">{{info}}</li>
             </ul>
         </div><!--End-->
         <div class="card-item"><!--Start-->
@@ -41,37 +39,33 @@
               actor: this.actor,
               gender: this.gender,
               haircolor: this.hair_color,
-              datalist: [
-                {actor: this.actor},
-                {gender: this.gender},
-                {haircolor: this.hair_color}
-              ]
+              starwarsinfolist: [this.actor, this.gender, this.hair_color]
             }
         },
         methods: {
           async  getStarWarsActors(id) {
             let response = await fetch(`https://swapi.dev/api/people/${id}/`);
             let data = await response.json();
-            console.log(data.name);
+            //console.log(data.name);
             return data.name;
           },
           async  getStarWarsGender(id) {
             let response = await fetch(`https://swapi.dev/api/people/${id}/`);
             let data = await response.json();
-            console.log(data.gender);
+            //console.log(data.gender);
             return data.gender;
           },
           async  getStarWarsHairColor(id) {
             let response = await fetch(`https://swapi.dev/api/people/${id}/`);
             let data = await response.json();
-            console.log(data.hair_color);
+            //console.log(data.hair_color);
             return data.hair_color;
           }  
         },
         async created() {
-          this.actor = await this.getStarWarsActors(1); //call get actors function
-          this.gender = await this.getStarWarsGender(1); //call get gender function
-          this.hair_color = await this.getStarWarsHairColor(1); //call get hair color function
+          await this.getStarWarsActor(1); //call get actors function
+          await this.getStarWarsGender(1); //call get gender function
+          await this.getStarWarsHairColor(1); //call get hair color function
         }
     }
 
