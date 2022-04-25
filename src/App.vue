@@ -28,6 +28,27 @@
 body{
   margin: 0px;
   font-family: 'Open Sans', sans-serif;
+  min-height: 100vh;
+}
+
+h2 {
+  color: white;
+  font-size: 24px;
+}
+
+h3 {
+  color: #FFE81F;
+  font-size: 14px;
+}
+
+ul {
+    list-style: none;
+    margin: 0px;
+}
+
+li {
+    margin: 10px 0px;
+    font-size: 16px;
 }
 
 </style>

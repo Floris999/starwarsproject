@@ -25,25 +25,26 @@
         name: "MainArea",
         data() {
             return {
-            actordetails: [],
-            id: [1, 2, 3, 4, 5]
+            actordetails: []
             }
         },
         methods: {
-          async  getStarWarsActorDetails(id) {
-            let response = await fetch(`https://swapi.dev/api/people/${id}`);
-            let data = await response.json();
-            //console.log(data);
-            let listDetails = {
-              name: data.name,
-              gender: data.gender,
-              haircolor: data.hair_color
+          async  getStarWarsActorDetails() {
+            for(let id = 1; id < 17; id++) { //begin loop
+              let response = await fetch(`https://swapi.dev/api/people/${id}`);
+              let data = await response.json();
+              //console.log(data);
+              let listDetails = {
+                name: data.name,
+                gender: data.gender,
+                haircolor: data.hair_color
             }
             this.actordetails.push(listDetails);
+            } //end loop
           }, 
         },
         async created() {
-          await this.getStarWarsActorDetails(1); //call get actors details function
+          await this.getStarWarsActorDetails(); //call get actors details function
         }
     }
 
@@ -53,26 +54,6 @@
 
 .dark-side h1 {
   -webkit-text-stroke: 1px #FFE81F;
-}
-
-h2 {
-  color: white;
-  font-size: 24px;
-}
-
-h3 {
-  color: #FFE81F;
-  font-size: 14px;
-}
-
-ul {
-    list-style: none;
-    margin: 0px;
-}
-
-li {
-    margin: 10px 0px;
-    font-size: 16px;
 }
 
 main {
@@ -133,7 +114,7 @@ main > * {
 .card-item {
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.199);
-  padding: 40px 20px;
+  padding: 40px 80px;
 }
 
 .card-item:hover {
@@ -152,15 +133,14 @@ button {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1180px) {
   main {
       flex-direction: column;
       width: auto;
   }
 
   .right-side {
-      background-position: center;
-      background-size: cover;
+    display: none;
   }
 
   .dark-side {
@@ -170,6 +150,10 @@ button {
   .cards {
     flex-direction: column;
     width: auto;
+  }
+
+  .card-item {
+    padding: 40px 20px;
   }
 }
 
