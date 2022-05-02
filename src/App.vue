@@ -10,7 +10,7 @@
 <script>
   import MenuBar from './components/MenuBar.vue';
   import MainArea from './components/MainArea.vue';
-  import GetMovies from './components/GetMovies.vue';
+  import GetMovies from './components/GetActorDetails.vue';
 
 
   export default {

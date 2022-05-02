@@ -6,7 +6,7 @@
             <h2>See here all the Star Wars actors</h2>
         <div class="cards">
           <ul>
-            <li v-for="actor in actordetails" :key="actor"><h3>{{actor.name}}</h3><button>See Details: {{actor.url}}</button></li>
+            <li v-for="actor in actordetail" :key="actor"><h3>{{actor.name}}</h3><button v-on:click="moreDetails()">See Details: {{actor.url}}</button></li>
           </ul>
         </div>
         </div>
@@ -18,17 +18,17 @@
 </template>
 
 <script>
-    //import GetMovies from './components/GetMovies.vue';
+    import GetActorDetails from './components/GetActirDetuals.vue';
     export default {
         name: "MainArea",
         data() {
             return {
-            actordetails: [],
+            actordetail: [],
             id: ""
             }
         },
         methods: {
-          async  getStarWarsActorDetails() {
+          async  getStarWarsActorDetail() {
             for(this.id = 1; this.id < 11; this.id++) { //begin loop
               let response = await fetch(`https://swapi.dev/api/people/${this.id}`);
               let data = await response.json();
@@ -37,12 +37,18 @@
                 name: data.name,
                 url: data.url
             }
-            this.actordetails.push(listDetails);
+            this.actordetail.push(listDetails);
             } //end loop
           },
+          moreDetails() {
+            if(this.url === this.data) {
+              this.getStarWarsActorDetails(this.url);
+              console.log(this.getStarWarsActorDetails);
+            }
+          }
         },
         async created() {
-          await this.getStarWarsActorDetails(); //call get actors details function
+          await this.getStarWarsActorDetail(); //call get actors details function
         }
     }
 

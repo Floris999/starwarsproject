@@ -8,27 +8,42 @@
 export default {
     name: "GetActorDetails",
     data() {
-        //moviedetails: []
+        //actordetails: [],
+        //filmdetails: []
 
     },
     methods: {
-        async  getStarWarsActorMovies() {
-            for(let id = 1; id < 7; id++) { //begin loop
-                let response = await fetch(`https://swapi.dev/api/films/${id}`);
+        async  getStarWarsActorDetails(url) {
+            for(let id = 1; id < 11; id++) { //begin loop
+                let response = await fetch(`url`);
                 let data = await response.json();
                 //console.log(data);
-                let listMovieDetails = {
-                    title: data.title,
-                    release: data.release_date,
-                    intro: data.opening_crawl,
-                    characters: data.characters
+                let listActorDetails = {
+                    name: data.name,
+                    birth: data.birth_year,
+                    gender: data.gender,
             }
-            this.moviedetails.push(listMovieDetails);
+            this.actordetails.push(listActorDetails);
+            } //end loop
+          }, 
+        async  getStarWarsFilmDetails() {
+            for(let id = 1; id < 7; id++) { //begin loop
+                let response = await fetch(`https://swapi.dev/api/film/${id}`);
+                let data = await response.json();
+                //console.log(data);
+                let listFilmDetails = {
+                    title: data.title,
+                    director: data.director,
+                    release: data.release_date,
+                    intro: data.opening_crawl
+            }
+            this.filmdetails.push(listFilmDetails);
             } //end loop
           }, 
     },
     async created() {
-        await this.getStarWarsActorMovies();
+        await this.getStarWarsActorDetails();
+        await this.getStarWarsFilmDetails();
     }
 }
 
