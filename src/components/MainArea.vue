@@ -6,7 +6,7 @@
             <h2>See here all the Star Wars actors</h2>
         <div class="cards">
           <ul>
-            <li v-for="actor in actordetail" :key="actor"><h3>{{actor.name}}</li>
+            <li v-for="actor in actordetail" :key="actor"><h3>{{actor.name}}</h3></li>
           </ul>
         </div>
         </div>
