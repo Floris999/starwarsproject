@@ -6,7 +6,7 @@
             <h2>See here all the Star Wars actors</h2>
         <div class="cards">
           <ul>
-            <li v-for="actor in actordetail" :key="actor"><h3>{{actor.name}}</h3></li>
+            <li v-for="actor in actordetail" :key="actor"><h3>{{actor.name}}</h3><button v-on:click="getStarWarsActorDetails()">Log details</button></li>
           </ul>
         </div>
         </div>
@@ -23,25 +23,43 @@
         data() {
             return {
             actordetail: [],
-            id: ""
+            characterid: [],
+            moreactordetails: [],
+            spliturl: []
             }
         },
         methods: {
-          async  getStarWarsActorDetail() {
+          async  getStarWarsActor() {
             for(this.id = 1; this.id < 11; this.id++) { //begin loop
               let response = await fetch(`https://swapi.dev/api/people/${this.id}`);
               let data = await response.json();
               //console.log(data);
+              let hyperlink = data.url;
+              let newHyperlink = await hyperlink.split("/");
+              let linkId = await newHyperlink.at(-2);
               let listDetails = {
                 name: data.name,
-                url: data.url
-            }
-            this.actordetail.push(listDetails);
+              }
+              this.characterid.push(this.id);
+              this.spliturl.push(linkId);
+              this.actordetail.push(listDetails);
             } //end loop
           },
+          async getStarWarsActorDetails() {
+            if(this.spliturl === this.characterid) {
+              let response = await fetch(`https://swapi.dev/api/people/1/`);
+              let data = await response.json();
+              //console.log(data);
+              let listActorDetails = {
+                name: data.name,
+                gender: data.gender
+            }
+            this.moreactordetails.push(listActorDetails);
+            }
+          }
         },
         async created() {
-          await this.getStarWarsActorDetail(); //call get actors details function
+          await this.getStarWarsActor(); //call get actors details function
         }
     }
 
