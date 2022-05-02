@@ -6,7 +6,7 @@
             <h2>See here all the Star Wars actors</h2>
         <div class="cards">
           <ul>
-            <li v-for="actor in actordetail" :key="actor"><h3>{{actor.name}}</h3><button v-on:click="moreDetails()">See Details: {{actor.url}}</button></li>
+            <li v-for="actor in actordetail" :key="actor"><h3>{{actor.name}}</li>
           </ul>
         </div>
         </div>
@@ -18,7 +18,6 @@
 </template>
 
 <script>
-    import GetActorDetails from './components/GetActirDetuals.vue';
     export default {
         name: "MainArea",
         data() {
@@ -40,12 +39,6 @@
             this.actordetail.push(listDetails);
             } //end loop
           },
-          moreDetails() {
-            if(this.url === this.data) {
-              this.getStarWarsActorDetails(this.url);
-              console.log(this.getStarWarsActorDetails);
-            }
-          }
         },
         async created() {
           await this.getStarWarsActorDetail(); //call get actors details function
