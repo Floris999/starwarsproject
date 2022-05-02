@@ -5,12 +5,9 @@
             <p>This project is about the Star Wars API. The project is based on API practice and Front-End work in Vue.js.</p>
             <h2>See here all the Star Wars actors</h2>
         <div class="cards">
-        <div class="card-item" v-for="actor in actordetails" :key="actor"><!--Start-->
-          <h3>Name: {{actor.name}}</h3>
-          <h3>Gender: {{actor.gender}}</h3>
-          <h3>Hair Color: {{actor.haircolor}}</h3>
-          <button>View Movies</button>
-        </div><!--End-->
+          <ul>
+            <li v-for="actor in actordetails" :key="actor"><h3>{{actor.name}}</h3><button>See Details: {{actor.url}}</button></li>
+          </ul>
         </div>
         </div>
         <div class="right-side">
@@ -21,27 +18,28 @@
 </template>
 
 <script>
+    //import GetMovies from './components/GetMovies.vue';
     export default {
         name: "MainArea",
         data() {
             return {
-            actordetails: []
+            actordetails: [],
+            id: ""
             }
         },
         methods: {
           async  getStarWarsActorDetails() {
-            for(let id = 1; id < 17; id++) { //begin loop
-              let response = await fetch(`https://swapi.dev/api/people/${id}`);
+            for(this.id = 1; this.id < 11; this.id++) { //begin loop
+              let response = await fetch(`https://swapi.dev/api/people/${this.id}`);
               let data = await response.json();
               //console.log(data);
               let listDetails = {
                 name: data.name,
-                gender: data.gender,
-                haircolor: data.hair_color
+                url: data.url
             }
             this.actordetails.push(listDetails);
             } //end loop
-          }, 
+          },
         },
         async created() {
           await this.getStarWarsActorDetails(); //call get actors details function

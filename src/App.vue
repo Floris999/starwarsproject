@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <menu-bar></menu-bar>
+    <get-movies></get-movies>
     <main-area></main-area>
 
   </div>
@@ -9,13 +10,15 @@
 <script>
   import MenuBar from './components/MenuBar.vue';
   import MainArea from './components/MainArea.vue';
+  import GetMovies from './components/GetMovies.vue';
 
 
   export default {
       name: 'App',
         components: {
           MenuBar,
-          MainArea
+          MainArea,
+          GetMovies
     
         }
   }
