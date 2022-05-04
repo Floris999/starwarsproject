@@ -2,7 +2,7 @@
   <div id="app">
     <menu-bar></menu-bar>
     <main-area></main-area>
-    <router-link to="/about">About</router-link>
+    <router-view />
 
   </div>
 </template>
