@@ -1,10 +1,9 @@
 <template>
   <div id="app">
+    <router-view/>
     <menu-bar></menu-bar>
     <main-area></main-area>
-    <router-view />
-
-  </div>
+    </div>
 </template>
 
 <script>

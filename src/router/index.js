@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MainArea from '../components/MainArea.vue'
+
 
 Vue.use(VueRouter)
+
+import MainArea from '../components/MainArea.vue'
 
 const routes = [
   {
